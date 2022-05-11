@@ -5,17 +5,61 @@ import {
   Input,
   Flex,
   Text,
-  GridItem,
-  AiOutlineSearch,
-  Icon,
-  useColorModeValue,
-  createIcon,
-  SimpleGrid,
-  Grid,
   Link,
+  Stack,
+  VStack,
+  HStack,
+  Heading,
+  InputGroup,
+  InputRightElement,
+  Button, 
+  Image
 } from '@chakra-ui/react';
 
-export default function CallToActionWithAnnotation() {
+import HomeCard from '../components/HomeCard';
+
+import { Search2Icon } from '@chakra-ui/icons';
+
+import { ArrowText } from '../components/ArrowText';
+
+export default function Home() {
+
+  const bgPermuta = 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80'
+  const bgBTS = 'https://images.unsplash.com/photo-1556909172-54557c7e4fb7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80'
+  const bgImobiliados = 'https://cdn.pixabay.com/photo/2016/08/26/15/06/home-1622401_960_720.jpg'
+  const bgSimulation = 'https://img.freepik.com/free-photo/young-couple-new-apartment-with-small-dog_329181-18194.jpg?w=740&t=st=1651549053~exp=1651549653~hmac=3ae145b33cb70bbb1df8cae79787f8c45b260d973fbbc519395fc9944ecb850a'
+  const bgSimuation2 = 'https://studiodopiso.com.br/wp-content/uploads/2021/05/family-moving-using-boxes-1_Easy-Resize.com_.jpg'
+
+  const basicBoxStyles = {
+      display: 'flex',
+      borderRadius: 'lg',
+      filter: 'grayscale(65%)',
+      alignItems: 'flex-end',
+      justifyContent: 'flex-start',
+      p: 5,
+      shadow:'md',
+      backgroundSize:'cover',
+      backgroundPosition: 'center', 
+      w: 400,
+      h: 200,
+    }
+
+  const basicBoxStyles2 = {
+      display: 'flex',
+      borderRadius: 'lg',
+      filter: 'grayscale(65%)',
+      alignItems: 'flex-end',
+      justifyContent: 'flex-start',
+      p: 5,
+      shadow:'md',
+      borderWidth: 1,
+      backgroundSize:'cover',
+      backgroundPosition: 'center', 
+      w: 500,
+      h: 200
+    }
+    
+
   return (
     <>
       <Header/>
@@ -37,53 +81,100 @@ export default function CallToActionWithAnnotation() {
           borderRadius={15}
 
           >
-            <Text textAlign={'flex-start'} fontFamily={'poppins'} fontWeight={700} fontSize={34}>Você muda, e o Farol Di te guia</Text>
-            <Box>
-              <SimpleGrid columns={2} spacing={1}>
-                <Box m={5} >
-                  <Text fontFamily={'poppins'} fontWeight={300}>O que você procura?</Text>
-                  <SimpleGrid justifyContent={'flex-start'} columns={2} mt={3} fontFamily={'poppins'} fontWeight={300} fontStyle={'normal'} fontSize={15}>
-                  <Link borderRadius={8} textAlign={'center'} p={0.8} w={110} backgroundColor={'orange.500'}>Casa</Link>
-                  <Link borderRadius={8} textAlign={'center'} p={0.8} w={110} ml={-40} backgroundColor={'orange.500'}>Apartamento</Link>
-                  </SimpleGrid>
-                </Box>
-                <Box mt={5} >
-                  <Text fontFamily={'poppins'} fontWeight={300}>Qual modalidade?</Text>
-                  <SimpleGrid justifyContent={'flex-start'} columns={5} mt={3} fontFamily={'poppins'} fontWeight={300} fontStyle={'normal'} fontSize={15} >
-                    <Link textAlign={'center'} p={0.8} w={100}  backgroundColor={'orange.500'} borderRadius={8}>Venda</Link>
-                    <Link textAlign={'center'} p={0.8} w={100} backgroundColor={'orange.500'} borderRadius={8}>Aluguel</Link>
-                    <Link textAlign={'center'} p={0.8} w={100} backgroundColor={'orange.500'} borderRadius={8}>BTS</Link>
-                    <Link textAlign={'center'} p={0.8} w={100} backgroundColor={'orange.500'} borderRadius={8}>Permuta</Link>
-                    <Link textAlign={'center'} p={0.8} w={100} backgroundColor={'orange.500'} borderRadius={8}>Imobiliarios</Link>
-                  </SimpleGrid>
-                </Box>
-              </SimpleGrid>
+            <Text fontFamily={'poppins'} fontWeight={700} fontSize={'3xl'}>Você muda, e o Farol Di te guia</Text>
+            <HStack align={'flex-start'} justify='space-around' mt={'30'} mb={'15'}>
               
-                <Input mt={5} w={'98%'} type="text" backgroundColor={'white'} placeholder="Pesquisar..."  />
-             </Box>
+              
+              
+                <VStack>
+                  <HStack>
+                    <ArrowText/>
+                    <Text alignSelf={'flex-start'} textAlign={'left'} fontFamily={'poppins'} fontWeight={300}>O que você procura?</Text>
+                  </HStack>
+                
+                <Stack direction={'row'} fontFamily={'poppins'} >
+                  <Link borderRadius={15} textAlign={'center'} p={2}  backgroundColor={'orange.500'}>Casa</Link>
+                  <Link borderRadius={15} textAlign={'center'} p={2}  backgroundColor={'orange.500'}>Apartamento</Link>  
+                </Stack>
+                </VStack>
+
+                <VStack>
+                  
+                <HStack alignSelf={'flex-start'}>
+                    <ArrowText/>
+                    <Text  fontFamily={'poppins'} fontWeight={300}>Qual modalidade?</Text>
+                  </HStack>
+                  
+                <Stack direction={'row'} fontFamily={'poppins'}>
+                  
+                    <Link textAlign={'center'}  p={2}  backgroundColor={'orange.500'} borderRadius={15}>Venda</Link>
+                    <Link textAlign={'center'}  p={2}  backgroundColor={'orange.500'} borderRadius={15}>Aluguel</Link>
+                    <Link textAlign={'center'}  p={2}  backgroundColor={'orange.500'} borderRadius={15}>BTS</Link>
+                    <Link textAlign={'center'}  p={2}  backgroundColor={'orange.500'} borderRadius={15}>Permuta</Link>
+                    <Link textAlign={'center'}  p={2}  backgroundColor={'orange.500'} borderRadius={15}>Imobiliarios</Link>
+                  
+                </Stack>
+                </VStack>
+              
+              
+              
+                
+            </HStack>
+            <InputGroup mt={8}>
+              <InputRightElement>
+                <Button colorScheme={'orange'} borderRightRadius={10} borderLeftRadius={0}>
+                  {<Search2Icon  />}
+                </Button>
+              </InputRightElement>
+              <Input fontFamily={'poppins'} w={'100%'} borderRadius={10} type="text" backgroundColor={'white'} color={'#2F4467'} placeholder="Pesquisar..."/>
+            </InputGroup>
+            
+
           </Box>
 
         </Flex>
-        <Text mb={25} textAlign={'left'} fontFamily={'poppins'} fontWeight={700} fontSize={34} color={'#2F4467'} marginLeft={100} marginTop={25} >Conheça mais sobre nossas especialidades</Text>
-        <Grid templateColumns='repeat(3, 1fr)' gap={6}>
-          <GridItem w='100%' h='10' bg='blue.500' />
-          <GridItem w='100%' h='10' bg='blue.500' />
-          <GridItem w='100%' h='10' bg='blue.500' />
-        </Grid>
 
-        <Text mb={25} textAlign={'left'} fontFamily={'poppins'} fontWeight={700} fontSize={34} color={'#2F4467'} marginLeft={100} marginTop={25} >Conheça nossas formas de simulações</Text>
-        <Grid templateColumns='repeat(2, 1fr)' gap={6}>
-          <GridItem w='100%' h='10' bg='blue.500' />
-          <GridItem w='100%' h='10' bg='blue.500' />
-        </Grid>
+        <HStack mb={25} marginLeft={100} marginTop={20}>
+          <ArrowText boxSize={'55'} mr={'25'} />
+          <Text  textAlign={'left'} fontFamily={'poppins'} fontWeight={700} fontSize={34} color={'#2F4467'} >Conheça mais sobre nossas especialidades</Text>
+        </HStack>
         
+        <HStack justify={'center'} spacing={5}>
+          <Box bgImg={bgPermuta} sx={basicBoxStyles} >
+            <Link href='/permuta' _hover={{textDecoration: 'none', color: 'orange.500',}}><Heading  borderBottom={'2px solid white'} w={150} fontSize='xl'>Permutas</Heading></Link>
+          </Box>
+          <Box bgImg={bgBTS} sx={basicBoxStyles}>
+            <Link href='/bts' _hover={{textDecoration: 'none', color: 'orange.500',}}><Heading borderBottom={'2px solid white'} w={150} fontSize='xl'>BTS</Heading></Link>
+          </Box>
+          <Box bgImg={bgImobiliados} sx={basicBoxStyles}>
+          <Link href='/mobiliados' _hover={{textDecoration: 'none', color: 'orange.500',}}><Heading  borderBottom={'2px solid white'} w={150} fontSize='xl'>Imoboliados</Heading></Link>
+          </Box>
+        </HStack>
 
-        <Text mb={25} textAlign={'left'} fontFamily={'poppins'} fontWeight={700} fontSize={34} color={'#2F4467'} marginLeft={100} marginTop={25} >Pode te interessar </Text>
-        <Grid templateColumns='repeat(3, 1fr)' gap={6}>
-          <GridItem w='100%' h='10' bg='blue.500' />
-          <GridItem w='100%' h='10' bg='blue.500' />
-          <GridItem w='100%' h='10' bg='blue.500' />
-        </Grid>
+        <HStack mb={25} marginLeft={100} marginTop={10}>
+          <ArrowText boxSize={'55'} mr={'25'} />
+          <Text  textAlign={'left'} fontFamily={'poppins'} fontWeight={700} fontSize={34} color={'#2F4467'}>Conheça nossas formas de simulações</Text>
+        </HStack>
+
+        <HStack justify={'center'} spacing={20}>
+          <Box bgImg={bgSimulation} sx={basicBoxStyles2}>
+            <Heading  borderBottom={'2px solid white'} w={400} fontSize='xl'>Seguro fiança e Título de capitalização</Heading>
+          </Box>
+          <Box bgImg={bgSimuation2} sx={basicBoxStyles2} >
+            <Heading  borderBottom={'2px solid white'} w={300} fontSize='xl'>Simulador de crédito</Heading>
+          </Box>
+        </HStack>
+        
+        <HStack mb={25} marginLeft={100} marginTop={10}>
+          <ArrowText boxSize={'55'} mr={'25'} />
+          <Text  textAlign={'left'} fontFamily={'poppins'} fontWeight={700} fontSize={34} color={'#2F4467'}>Conheça nossas formas de simulações</Text>
+        </HStack>
+
+        <HStack justify={'center'} spacing={5} mb={45}>
+          <HomeCard/>
+          <HomeCard/>
+          <HomeCard/>
+        </HStack>
 
       <Footer></Footer>
     </>

@@ -5,8 +5,13 @@ import {
   SimpleGrid,
   Text,
   Link,
+  HStack,
+  Icon,
 } from '@chakra-ui/react';
 
+import MapFooter from './Map';
+
+import { ImFacebook2 } from 'react-icons/im'
 
 export default function Footer() {
   return (
@@ -32,7 +37,7 @@ export default function Footer() {
               <Text mt={15}>(62) 3099-1399</Text>
             </Box>
             <Box>
-              <Box bg={'gray.300'} w={220} h={167}></Box>
+              <MapFooter/>
             </Box>
             </SimpleGrid>
           </Stack>

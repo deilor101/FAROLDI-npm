@@ -10,10 +10,10 @@ HStack,
   useColorModeValue,
   Stack,
 } from '@chakra-ui/react';
-import Logo from './Logo';
 import '../../theme/index';
 import { FaUser } from 'react-icons/fa';
 
+import Logo from './Logo';
 
 const Links = ['Serviços', 'Sobre Nós', 'Ajuda'];
 
@@ -50,10 +50,13 @@ export default function Header() {
             </HStack>
           </HStack>
           <Flex alignItems={'center'}>
-            <Menu>   
+            <Menu>
+            <Link href={'/login'}>
             <Button colorScheme='orange' size='md' borderRadius={4} fontWeight='500' fontSize={14} leftIcon={<FaUser/>}>
                 Entrar           
             </Button>
+            </Link>  
+            
             </Menu>
           </Flex>
         </Flex>
