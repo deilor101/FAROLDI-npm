@@ -17,6 +17,7 @@ import {
 } from '@chakra-ui/react';
 
 import HomeCard from '../components/HomeCard';
+import Results from './results';
 
 import { Search2Icon } from '@chakra-ui/icons';
 
