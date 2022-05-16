@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { Search2Icon } from '@chakra-ui/icons';
 import { HStack, Input, InputGroup, InputRightElement, Button, Select, Flex, Heading, VStack } from '@chakra-ui/react'
@@ -7,8 +7,25 @@ import Header from '../components/Header';
 
 import { ArrowText } from '../components/ArrowText';
 import ImovelCard from '../components/ImovelCard';
+import ImovelService from '../services/ImovelService';
+
 
 function Results() {
+  const [finalidade, setFinalidade] = useState();
+
+  const data = {
+    "finalidade": "2", //finalidade: OBRIGATÓRIO - Enviar 1 para ALUGUEL ou 2 para VENDA
+    "numeroPagina": "1", //
+    "numeroRegistros": "20", //número de registros que você quer que venha no resultado da resposta
+    "numeroQuartos": "5" //OPCIONAL - Enviar nº de quartos a partir, 0 para todos ou negativo para exato
+  }
+
+  useEffect(() => {
+    ImovelService.allImoveis(data)
+    .then(res => console.log('resposta', res.data))
+    .catch(err => console.log('error', err))
+  }, [])
+
   return (
     <>
     <Header/>
@@ -58,8 +75,8 @@ function Results() {
       <ImovelCard/>
       <ImovelCard/>
     </VStack>
-    
-    
+
+
     <Footer/>
     </>
   )
