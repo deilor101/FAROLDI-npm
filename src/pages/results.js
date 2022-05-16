@@ -11,7 +11,7 @@ import ImovelService from '../services/ImovelService';
 
 
 function Results() {
-  const [finalidade, setFinalidade] = useState();
+  const [finalidade, setFinalidade] = useState();enteeE
 
   const data = {
     "finalidade": "2", //finalidade: OBRIGATÓRIO - Enviar 1 para ALUGUEL ou 2 para VENDA
