@@ -10,21 +10,38 @@ import ImovelCard from '../components/ImovelCard';
 import ImovelService from '../services/ImovelService';
 
 
-function Results() {
-  const [finalidade, setFinalidade] = useState();enteeE
+function Results(props) {
+  const [finalidade, setFinalidade] = useState(1);
+  const [quartos, setQuartos] = useState(2);
+  const [imoveis, setImoveis] = useState();
 
-  const data = {
-    "finalidade": "2", //finalidade: OBRIGATÓRIO - Enviar 1 para ALUGUEL ou 2 para VENDA
+  let data = {
+    "finalidade": finalidade, //finalidade: OBRIGATÓRIO - Enviar 1 para ALUGUEL ou 2 para VENDA
     "numeroPagina": "1", //
     "numeroRegistros": "20", //número de registros que você quer que venha no resultado da resposta
-    "numeroQuartos": "5" //OPCIONAL - Enviar nº de quartos a partir, 0 para todos ou negativo para exato
+    "numeroQuartos": quartos //OPCIONAL - Enviar nº de quartos a partir, 0 para todos ou negativo para exato
+  }
+
+   function handleType(event) {
+    setFinalidade(event.target.value) 
+    console.log(event.target.value)
+  };
+
+  function handleQuartos(e) {
+    setQuartos(e.target.value)
+    console.log(e.target.value)
   }
 
   useEffect(() => {
     ImovelService.allImoveis(data)
-    .then(res => console.log('resposta', res.data))
+    .then(res => {
+      setImoveis(res.data.lista)
+      console.log(res.data)
+    })
     .catch(err => console.log('error', err))
-  }, [])
+  }, []);
+
+  
 
   return (
     <>
@@ -39,11 +56,10 @@ function Results() {
               </InputRightElement>
               <Input fontFamily={'poppins'} w={'100%'} borderRadius={10} type="text" backgroundColor={'white'} color={'#2F4467'} placeholder="Pesquisar..."/>
         </InputGroup>
-        <Select color>
+        <Select onChange={handleType} color>
             <option>Tipos</option>
-            <option>----------</option>
-            <option>----------</option>
-            <option>----------</option>
+            <option value={'1'}>Aluguel</option>
+            <option value={'2'}>Venda</option>
         </Select>
         <Select>
             <option>Modalidades</option>
@@ -51,11 +67,12 @@ function Results() {
             <option>----------</option>
             <option>----------</option>
         </Select>
-        <Select>
-            <option>Quartos</option>
-            <option>----------</option>
-            <option>----------</option>
-            <option>----------</option>
+        <Select onChange={handleQuartos}>
+            <option value={'0'}>Quartos</option>
+            <option value={'1'}>1</option>
+            <option value={'2'}>2</option>
+            <option value={'3'}>3</option>
+            <option value={'4'}>4+</option>
         </Select>
         <Select>
             <option>Preço</option>
@@ -70,10 +87,24 @@ function Results() {
             <Heading textAlign={'center'} >Encontre aqui o que você procura</Heading>
     </HStack>
     <VStack mt={45} mb={45} spacing={10}>
-      <ImovelCard/>
-      <ImovelCard/>
-      <ImovelCard/>
-      <ImovelCard/>
+      
+      {imoveis?.map((item) => {
+        return(
+          <ImovelCard
+          photo={item.urlfotoprincipal}
+          title={item.titulo}
+          price={item.valor}
+          width={item.arealote}
+          quarto={item.numeroquartos}
+          banho={item.numerobanhos}
+          vaga={item.numerovagas}
+          location={item.endereco} 
+          id={item.codigo}
+          />
+        ) 
+        
+       })}
+      
     </VStack>
 
 

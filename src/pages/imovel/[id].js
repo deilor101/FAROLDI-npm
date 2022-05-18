@@ -1,20 +1,38 @@
 import { Flex, Grid, Text, HStack, Image, VStack, Box, Button, Heading, FormControl, Input, Textarea } from '@chakra-ui/react'
-import React from 'react'
-import Footer from '../components/Footer';
-import Header from '../components/Header';
-import PicsSession from '../components/PicsSession';
+import React, { useEffect, useState } from 'react'
+import Footer from '../../components/Footer';
+import Header from '../../components/Header';
+import PicsSession from '../../components/PicsSession';
 import { AiOutlineCar, AiOutlineColumnWidth } from 'react-icons/ai'
 import { BiBed } from 'react-icons/bi'
 import { GiBathtub } from 'react-icons/gi'
+import { useRouter } from 'next/router';
+import ImovelService from '../../services/ImovelService';
+
+
 
 function Imovel() {
+    const router = useRouter();
+    console.log(router.query.id)
     
+    const [imovel, setImovel] = useState();
+
+    useEffect(() => {
+        ImovelService.singleImovel(router.query.id)
+        .then(res => {
+          setImovel(res.data.imovel)
+          console.log(res.data)
+        })
+        .catch(err => console.log('error', err))
+      }, [router.query.id]);
+
+
   return (
     <>
     <Header/>
 
     <VStack fontFamily={'poppins'} align={'flex-start'} ml={'20%'} mb={'30px'} mt={'30px'}>
-        <Heading color={'#2F4467'}>Condomínio Bela Vista</Heading>
+        <Heading color={'#2F4467'}>{imovel?.titulo}</Heading>
         <Text color={'#2F4467'}>QR 100, Conjunto 8 Casa 05, Samambaia sul</Text>
     </VStack>
     
@@ -54,21 +72,14 @@ function Imovel() {
     <HStack w={'95%'} mt={'55px'} spacing={10} mb={'55px'} >
         <VStack color={'black'} textAlign={'justify'} w={'70%'}>
         <Text>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ut mi in ligula lobortis scelerisque sollicitudin quis enim. Donec eleifend dui sit amet diam feugiat, a convallis dui fringilla. In hac habitasse platea dictumst. Nunc vitae diam at justo malesuada imperdiet. Integer in laoreet odio, eu posuere ipsum. Mauris eu nibh rutrum ante egestas auctor. Vivamus varius est id ultrices tempor. Phasellus commodo posuere erat sed mollis.
-
-            Ut pharetra ante vel risus rhoncus dictum. Aliquam dictum arcu at ullamcorper porttitor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Quisque lorem ante, blandit sed gravida at, laoreet non orci. Aliquam libero magna, semper ac dapibus vulputate, congue quis ipsum. Suspendisse orci urna, accumsan nec arcu id, fringilla mollis lorem. Praesent venenatis lobortis feugiat. Proin sagittis ligula sed velit rutrum, et porta lectus sodales. Quisque mollis nunc ac est iaculis rhoncus. Cras nec elementum sem, a rhoncus est.
-            </Text>
-            <Text>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ut mi in ligula lobortis scelerisque sollicitudin quis enim. Donec eleifend dui sit amet diam feugiat, a convallis dui fringilla. In hac habitasse platea dictumst. Nunc vitae diam at justo malesuada imperdiet. Integer in laoreet odio, eu posuere ipsum. Mauris eu nibh rutrum ante egestas auctor. Vivamus varius est id ultrices tempor. Phasellus commodo posuere erat sed mollis.
-
-            Ut pharetra ante vel risus rhoncus dictum. Aliquam dictum arcu at ullamcorper porttitor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Quisque lorem ante, blandit sed gravida at, laoreet non orci. Aliquam libero magna, semper ac dapibus vulputate, congue quis ipsum. Suspendisse orci urna, accumsan nec arcu id, fringilla mollis lorem. Praesent venenatis lobortis feugiat. Proin sagittis ligula sed velit rutrum, et porta lectus sodales. Quisque mollis nunc ac est iaculis rhoncus. Cras nec elementum sem, a rhoncus est.
-            </Text>
+        {imovel?.descricao} 
+        </Text>
         </VStack>
             
             <VStack bg={'#E7E7E7'} padding={25} borderRadius={20} w={[]} spacing={5} fontFamily={'poppins'}>
                 <Heading alignSelf={'flex-start'} color={'#F27035'} fontWeight={'500'} fontSize={'2xl'}>Valor</Heading>
                 <HStack alignSelf={'flex-start'} borderBottom={'solid 1px #2F4467'} paddingBottom={3}>
-                    <Heading  color={'#F27035'}>R$ 800,00</Heading>
+                    <Heading  color={'#F27035'}>{imovel?.valor}</Heading>
                     <Text  color={'#F27035'}>+R$ 100,00 Condomínio</Text>
                 </HStack>
                 <Heading color={'#2F4467'} fontWeight={'500'} fontSize={'xl'}>Entre em contato conosco</Heading>
